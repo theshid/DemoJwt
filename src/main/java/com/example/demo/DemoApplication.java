@@ -1,8 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.domain.AppUser;
-import com.example.demo.domain.Role;
-import com.example.demo.service.UserService;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +17,7 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     CommandLineRunner run(UserService userService) {
         return args -> {
             userService.saveRole(new Role(null, "ROLE_USER"));
@@ -30,12 +28,12 @@ public class DemoApplication {
 
             userService.addRoleToUser("john","ROLE_USER");
         };
-    }
+    }*/
 
-    @Bean
+   /* @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-    }
+    }*/
 
 
 }

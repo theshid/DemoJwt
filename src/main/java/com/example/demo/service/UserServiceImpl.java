@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.domain.AppUser;
+/*import com.example.demo.domain.AppUser;
 import com.example.demo.domain.Role;
 import com.example.demo.repo.RoleRepo;
 import com.example.demo.repo.UserRepo;
@@ -18,8 +18,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static java.rmi.server.LogStream.log;
+import static java.rmi.server.LogStream.log;*/
 
+/*
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -78,3 +79,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
 }
+*/
