@@ -1,11 +1,11 @@
 package com.example.demo.service;
 
-import com.example.demo.domain.AppUser;
+/*import com.example.demo.domain.AppUser;
 import com.example.demo.domain.Role;
 
-import java.util.List;
+import java.util.List;*/
 
-public interface UserService {
+/*public interface UserService {
 
     AppUser saveUser(AppUser user);
 
@@ -16,4 +16,4 @@ public interface UserService {
     AppUser getUser(String username);
 
     List<AppUser> getUsers();
-}
+}*/
