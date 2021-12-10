@@ -70,16 +70,17 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
         /*response.setHeader("access_token",access_token);
         response.setHeader("refresh_token",refresh_token);*/
+        log.info("This is the username:"+user.getUsername());
         Client client = clientRepository.findByUsername(user.getUsername());
-        log.info(user.getUsername());
+
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access_token", access_token);
         tokens.put("expiry_date", expiryDate.toString());
-        /*tokens.put("client_id", client.getId().toString());
+        tokens.put("client_id", client.getId().toString());
         tokens.put("first_name", client.getFirstName());
         tokens.put("last_name", client.getLastName());
         tokens.put("username", client.getUsername());
-        tokens.put("email", client.getEmail());*/
+        tokens.put("email", client.getEmail());
         //tokens.put("refresh_token",refresh_token);
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
