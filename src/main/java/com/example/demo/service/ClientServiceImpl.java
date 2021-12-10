@@ -64,13 +64,13 @@ public class ClientServiceImpl implements ClientService, UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Client client = clientRepository.findClientByEmail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Client client = clientRepository.findByUsername(username);
         if (client==null) {
             log.error("User not found in the DB");
             throw new UsernameNotFoundException("User not found int the DB");
         } else {
-            log.info("User found in the DC: {}", email);
+            log.info("User found in the DC: {}", username);
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(UserRole.CLIENT.name()));
