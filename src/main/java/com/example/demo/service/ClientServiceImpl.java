@@ -9,6 +9,7 @@ import com.example.demo.repo.ClientRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -30,11 +32,15 @@ public class ClientServiceImpl implements ClientService, UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public String signUpClient(Client client) {
-        boolean userExist = clientRepository.findByEmail(client.getEmail())
+        boolean emailExist = clientRepository.findByEmail(client.getEmail())
                 .isPresent();
-        if (userExist) {
-            //Todo if email not confirmed send confirmation email
-            throw new IllegalStateException("email already in use.");
+        boolean usernameExist = clientRepository.findClientByUsername(client.getUsername()).isPresent();
+        if (emailExist) {
+
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already in use.");
+           // throw new IllegalStateException("email already in use.");
+        } else if (usernameExist){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already in use.");
         }
 
 
