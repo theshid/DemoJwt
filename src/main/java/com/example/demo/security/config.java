@@ -2,6 +2,7 @@ package com.example.demo.security;
 
 import com.example.demo.filter.CustomAuthenticationFilter;
 import com.example.demo.filter.CustomAuthorizationFilter;
+import com.example.demo.repo.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,7 @@ public class  config  extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private  final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ClientRepository clientRepository;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -41,7 +43,7 @@ public class  config  extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(GET,"/api/user/**").hasAnyAuthority("CLIENT") ;
         http.authorizeRequests().antMatchers(POST,"api/user/save/**").hasAnyAuthority("ADMIN") ;
         http.authorizeRequests().anyRequest().authenticated();
-        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
+        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean(),clientRepository));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
