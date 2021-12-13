@@ -81,6 +81,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         tokens.put("last_name", client.getLastName());
         tokens.put("username", client.getUsername());
         tokens.put("email", client.getEmail());
+        tokens.put("user_role",client.getUserRole().name());
         //tokens.put("refresh_token",refresh_token);
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
