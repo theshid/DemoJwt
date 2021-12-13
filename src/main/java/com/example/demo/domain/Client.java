@@ -19,57 +19,18 @@ import java.util.Collections;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "client")
-public class Client  implements UserDetails {
+public class Client  extends  AppUser  {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String email;
-    private String password;
-    @Enumerated(EnumType.STRING)
-    private UserRole userRole;
     private Double balance;
 
-    public Client(String firstName, String lastName, String username, String email, String password, UserRole userRole, Double balance) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.userRole = userRole;
+
+    public Client(String firstName, String lastName, String email, String username, String password, UserRole userRole, Double balance) {
+        super(firstName, lastName, email, username, password, userRole);
         this.balance = balance;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(getUserRole().name());
-        return Collections.singleton(authority);
-    }
 
-    @Override
-    public String getUsername() {
-        return email;
-    }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
