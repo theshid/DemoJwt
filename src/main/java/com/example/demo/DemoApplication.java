@@ -17,23 +17,7 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    /*@Bean
-    CommandLineRunner run(UserService userService) {
-        return args -> {
-            userService.saveRole(new Role(null, "ROLE_USER"));
-            userService.saveRole(new Role(null, "ROLE_MANAGER"));
-            userService.saveRole(new Role(null, "ROLE_ADMIN"));
 
-            userService.saveUser(new AppUser(null,"John","john","2343",new ArrayList<>()));
-
-            userService.addRoleToUser("john","ROLE_USER");
-        };
-    }*/
-
-   /* @Bean
-    PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }*/
 
 
 }
