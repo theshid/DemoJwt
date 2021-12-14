@@ -11,6 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -99,6 +101,25 @@ public class ClientController {
             throw new RuntimeException("refresh token is missing");
         }
     }
+
+    /*@GetMapping("/redirect")*/
+    @RequestMapping("/redirect")
+    public void getRedirect(HttpServletResponse resp, HttpServletRequest request) throws IOException {
+
+        System.out.println("Auth: " + SecurityContextHolder.getContext().getAuthentication());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+       /* System.out.println("Principal: " + auth.getPrincipal());
+        System.out.println("Authorities: " + auth.getAuthorities()); //get it from here OR
+        System.out.println(request.isUserInRole("CLIENT")); // get it from Here as WELL (ONLY IF YOU HAVE A REQUEST)
+
+        if (request.isUserInRole("CLIENT")) {
+            resp.sendRedirect("/user");
+        } else if (request.isUserInRole("ADMIN")) {
+            resp.sendRedirect("/redirect");
+        }*/
+    }
+
 
 }
 

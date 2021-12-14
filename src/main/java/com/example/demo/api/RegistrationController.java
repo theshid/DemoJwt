@@ -11,16 +11,11 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
 
     private  final RegistrationService registrationService;
-    //private final UserService userService;
-    //private final ConfirmationTokenService confirmationTokenService;
+
 
     @PostMapping
     public String register(@RequestBody RegistrationRequest request){
         return registrationService.register(request);
     }
 
-    /*@GetMapping(path = "confirm")
-    public String confirm(@RequestParam("token") String token) {
-        return registrationService.confirmToken(token);
-    }*/
 }

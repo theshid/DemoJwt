@@ -33,10 +33,24 @@ public class RegistrationService {
                 request.getPassword(),
                 UserRole.CLIENT,
                 generateRandomBalance()));
-        //String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
 
-        /*emailSender.send(request.getEmail(),
-                buildEmail(request.getFirstName(), link));*/
+        return token;
+    }
+
+    public String registerAdmin(RegistrationRequest request) {
+        boolean isValidEmail = emailValidator.test(request.getEmail());
+        if (!isValidEmail) {
+            throw new IllegalStateException("Email not valid");
+        }
+
+        String token = clientService.signUpClient(new Client(
+                request.getFirstName(),
+                request.getLastName(),
+                request.getUsername(),
+                request.getEmail(),
+                request.getPassword(),
+                UserRole.ADMIN,
+                generateRandomBalance()));
         return token;
     }
 
